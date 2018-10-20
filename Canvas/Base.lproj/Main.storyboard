@@ -112,7 +112,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <panGestureRecognizer minimumNumberOfTouches="1" id="DtD-E8-D5C">
                     <connections>
-                        <action selector="panFaces:" destination="BYZ-38-t0r" id="cQ6-0T-d1Q"/>
+                        <action selector="panningTray:" destination="BYZ-38-t0r" id="neT-nB-8W7"/>
                     </connections>
                 </panGestureRecognizer>
                 <panGestureRecognizer minimumNumberOfTouches="1" id="ooP-0N-9U5">

@@ -65,6 +65,7 @@ class CanvasViewController: UIViewController {
         let translation = sender.translation(in: self.view)
         
         if sender.state == .began {
+            
             let imageView = sender.view as! UIImageView
             newlyCreatedFace = UIImageView(image: imageView.image)
             view.addSubview(newlyCreatedFace)
