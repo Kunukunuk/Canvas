@@ -37,10 +37,8 @@ class CanvasViewController: UIViewController {
         
         if sender.state == .began {
             originalCenter = tray.center
-            //self.trayUp = originalCenter
         } else if sender.state == .changed {
             tray.center = CGPoint(x: originalCenter.x, y: originalCenter.y + translation.y)
-            //self.trayDown = CGPoint(x: tray.center.x, y: tray.center.y + self.trayDownOffset)
         } else if sender.state == .ended {
             
             let velocity = sender.velocity(in: self.view)
