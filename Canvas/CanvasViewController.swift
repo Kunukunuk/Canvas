@@ -19,8 +19,9 @@ class CanvasViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        trayUp = tray.center // The initial position of the tray
-        trayDown = CGPoint(x: tray.center.x ,y: tray.center.y + trayDownOffset) // The position of the tray transposed down
+        trayUp = tray.center
+        trayDown = CGPoint(x: tray.center.x ,y: tray.center.y + trayDownOffset)
+        
     }
     
     
@@ -34,15 +35,24 @@ class CanvasViewController: UIViewController {
         
         if sender.state == .began {
             originalCenter = tray.center
+            //self.trayUp = originalCenter
         } else if sender.state == .changed {
             tray.center = CGPoint(x: originalCenter.x, y: originalCenter.y + translation.y)
+            //self.trayDown = CGPoint(x: tray.center.x, y: tray.center.y + self.trayDownOffset)
         } else if sender.state == .ended {
-            var velocity = sender.velocity(in: self.view)
+            
+            let velocity = sender.velocity(in: self.view)
             
             if velocity.y > 0 {
                 print("move down")
+                UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: [], animations: {
+                    self.tray.center = self.trayDown
+                }, completion: nil)
             } else {
                 print("move up")
+                UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: [], animations: {
+                    self.tray.center = self.trayUp
+                }, completion: nil)
             }
         }
 
