@@ -62,7 +62,7 @@ class CanvasViewController: UIViewController {
     
     @IBAction func panFaces(_ sender: UIPanGestureRecognizer) {
         
-         let translation = sender.translation(in: self.view)
+        let translation = sender.translation(in: self.view)
         
         if sender.state == .began {
             let imageView = sender.view as! UIImageView
@@ -72,6 +72,8 @@ class CanvasViewController: UIViewController {
             newlyCreatedFace.center.y += tray.frame.origin.y
             
             newlyCreatedFaceOriginalCenter = newlyCreatedFace.center
+            newlyCreatedFace.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(panNewlyFaces(_:) )))
+            newlyCreatedFace.isUserInteractionEnabled = true
         } else if sender.state == .changed {
             newlyCreatedFace.center = CGPoint(x: newlyCreatedFaceOriginalCenter.x + translation.x, y: newlyCreatedFaceOriginalCenter.y + translation.y)
         } else if sender.state == .ended {
@@ -79,6 +81,20 @@ class CanvasViewController: UIViewController {
         }
     }
     
+    @objc func panNewlyFaces(_ sender: UIPanGestureRecognizer) {
+        
+        let translation = sender.translation(in: self.view)
+        
+        if sender.state == .began {
+            newlyCreatedFace = (sender.view as! UIImageView) // to get the face that we panned on.
+            newlyCreatedFaceOriginalCenter = newlyCreatedFace.center // so we can offset by translation later.
+        } else if sender.state == .changed {
+            newlyCreatedFace.center = CGPoint(x: newlyCreatedFaceOriginalCenter.x + translation.x, y: newlyCreatedFaceOriginalCenter.y + translation.y)
+        } else if sender.state == .ended {
+            
+        }
+        
+    }
     
     /*
     // MARK: - Navigation
