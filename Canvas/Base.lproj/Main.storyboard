@@ -60,11 +60,14 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="tray" destination="JK2-jU-34Q" id="Bov-uc-L5G"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <panGestureRecognizer minimumNumberOfTouches="1" id="DtD-E8-D5C">
                     <connections>
-                        <action selector="panningTray:" destination="BYZ-38-t0r" id="SKu-tn-Bh2"/>
+                        <action selector="panningTray:" destination="BYZ-38-t0r" id="LIZ-ou-GBu"/>
                     </connections>
                 </panGestureRecognizer>
             </objects>

@@ -10,6 +10,8 @@ import UIKit
 
 class CanvasViewController: UIViewController {
 
+    @IBOutlet weak var tray: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -18,6 +20,10 @@ class CanvasViewController: UIViewController {
     
     
     @IBAction func panningTray(_ sender: UIPanGestureRecognizer) {
+        
+        let location = sender.location(in: self.view)
+        tray.center = location
+
     }
     
     /*
