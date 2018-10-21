@@ -83,6 +83,10 @@ class CanvasViewController: UIViewController, UIGestureRecognizerDelegate {
             let rotateG = UIRotationGestureRecognizer(target: self, action: #selector(didRotateFace(_:)))
             newlyCreatedFace.addGestureRecognizer(rotateG)
             rotateG.delegate = self
+            let doubleTap = UITapGestureRecognizer(target: self, action: #selector(doubleTap(_:)))
+            doubleTap.numberOfTapsRequired = 2
+            newlyCreatedFace.addGestureRecognizer(doubleTap)
+            
             newlyCreatedFace.isUserInteractionEnabled = true
             newlyCreatedFace.isMultipleTouchEnabled = true
             
@@ -120,6 +124,12 @@ class CanvasViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBAction func didRotateFace(_ sender: UIRotationGestureRecognizer) {
         let rotation = sender.rotation
         newlyCreatedFace.transform = CGAffineTransform(rotationAngle: rotation)
+    }
+    
+    @IBAction func doubleTap(_ sender: UITapGestureRecognizer) {
+        
+        newlyCreatedFace.removeFromSuperview()
+        
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
