@@ -73,6 +73,7 @@ class CanvasViewController: UIViewController {
             newlyCreatedFaceOriginalCenter = newlyCreatedFace.center
             newlyCreatedFace.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(panNewlyFaces(_:) )))
             newlyCreatedFace.addGestureRecognizer(UIPinchGestureRecognizer(target: self, action: #selector(didPinchFace(_:))))
+            newlyCreatedFace.addGestureRecognizer(UIRotationGestureRecognizer(target: self, action: #selector(didRotateFace(_:))))
             newlyCreatedFace.isUserInteractionEnabled = true
             
             newlyCreatedFace.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
@@ -83,7 +84,7 @@ class CanvasViewController: UIViewController {
         }
     }
     
-    @objc func panNewlyFaces(_ sender: UIPanGestureRecognizer) {
+    @IBAction func panNewlyFaces(_ sender: UIPanGestureRecognizer) {
         
         let translation = sender.translation(in: self.view)
         
@@ -104,6 +105,11 @@ class CanvasViewController: UIViewController {
         
         let scale = sender.scale
         newlyCreatedFace.transform = CGAffineTransform(scaleX: scale, y: scale)
+    }
+    
+    @IBAction func didRotateFace(_ sender: UIRotationGestureRecognizer) {
+        let rotation = sender.rotation
+        newlyCreatedFace.transform = CGAffineTransform(rotationAngle: rotation)
     }
     /*
     // MARK: - Navigation
