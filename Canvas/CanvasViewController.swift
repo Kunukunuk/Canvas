@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CanvasViewController: UIViewController {
+class CanvasViewController: UIViewController, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var tray: UIView!
     
@@ -71,10 +71,17 @@ class CanvasViewController: UIViewController {
             newlyCreatedFace.center.y += tray.frame.origin.y
             
             newlyCreatedFaceOriginalCenter = newlyCreatedFace.center
-            newlyCreatedFace.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(panNewlyFaces(_:) )))
-            newlyCreatedFace.addGestureRecognizer(UIPinchGestureRecognizer(target: self, action: #selector(didPinchFace(_:))))
-            newlyCreatedFace.addGestureRecognizer(UIRotationGestureRecognizer(target: self, action: #selector(didRotateFace(_:))))
+            let panG = UIPanGestureRecognizer(target: self, action: #selector(panNewlyFaces(_:) ))
+            newlyCreatedFace.addGestureRecognizer(panG)
+            panG.delegate = self
+            let pinchG = UIPinchGestureRecognizer(target: self, action: #selector(didPinchFace(_:)))
+            newlyCreatedFace.addGestureRecognizer(pinchG)
+            pinchG.delegate = self
+            let rotateG = UIRotationGestureRecognizer(target: self, action: #selector(didRotateFace(_:)))
+            newlyCreatedFace.addGestureRecognizer(rotateG)
+            rotateG.delegate = self
             newlyCreatedFace.isUserInteractionEnabled = true
+            newlyCreatedFace.isMultipleTouchEnabled = true
             
             newlyCreatedFace.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
         } else if sender.state == .changed {
@@ -111,14 +118,9 @@ class CanvasViewController: UIViewController {
         let rotation = sender.rotation
         newlyCreatedFace.transform = CGAffineTransform(rotationAngle: rotation)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
-    */
 
 }
