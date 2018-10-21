@@ -17,6 +17,7 @@ class CanvasViewController: UIViewController, UIGestureRecognizerDelegate {
     var trayDown: CGPoint!
     var newlyCreatedFace: UIImageView!
     var newlyCreatedFaceOriginalCenter: CGPoint!
+    @IBOutlet weak var arrowDirection: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,11 +48,13 @@ class CanvasViewController: UIViewController, UIGestureRecognizerDelegate {
                 print("move down")
                 UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: [], animations: {
                     self.tray.center = self.trayDown
+                    self.arrowDirection.transform = CGAffineTransform(rotationAngle: .pi)
                 }, completion: nil)
             } else {
                 print("move up")
                 UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: [], animations: {
                     self.tray.center = self.trayUp
+                    self.arrowDirection.transform = CGAffineTransform(rotationAngle: .pi * 2)
                 }, completion: nil)
             }
         }
