@@ -105,12 +105,11 @@ class CanvasViewController: UIViewController, UIGestureRecognizerDelegate {
         if sender.state == .began {
             newlyCreatedFace = (sender.view as! UIImageView) // to get the face that we panned on.
             newlyCreatedFaceOriginalCenter = newlyCreatedFace.center // so we can offset by translation later.
-            //newlyCreatedFace.transform = CGAffineTransform(scaleX: 1.25, y: 1.25)
             
         } else if sender.state == .changed {
             newlyCreatedFace.center = CGPoint(x: newlyCreatedFaceOriginalCenter.x + translation.x, y: newlyCreatedFaceOriginalCenter.y + translation.y)
         } else if sender.state == .ended {
-            //newlyCreatedFace.transform = newlyCreatedFace.transform.scaledBy(x: 0.75, y: 0.75)
+            
         }
         
     }
